@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Employee List</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: forestgreen;
+        }
+        .pre-scrollable{
+            height: 500px;
+            overflow-y: scroll;
+            background-color: black;
+            color: white;
+        }
+        h1{
+            text-align: center;
+            color: lightgreen;
+        }
+        .seatTable {
+            background-color: forestgreen;
+        }
+        table, th, td {
+            color: white;
+        }
+        .specialbtn {
+            padding: 30px 60px;
+            align-self: center;
+        }
+        .firstSection {
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+<div class="firstSection">
+<h1>Seat Reservation System</h1>
+<!--seat table-->
+<div class="container mt-2 seatTable">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            </thead>
+            <hr>
+            <tbody>
+            <tr th:each="customer:${customerList}">
+                <td th:text="${customer.seatno == '1A'} ? ${customer.name} : '1A'"></td>
+                <td th:text="${customer.seatno == '1B'} ? ${customer.name} : '1B'"></td>
+                <td th:text="${customer.seatno == '1C'} ? ${customer.name} : '1C'"></td>
+                <td th:text="${customer.seatno == '1D'} ? ${customer.name} : '1D'"></td>
+                <td th:text="${customer.seatno == '1E'} ? ${customer.name} : '1E'"></td>
+            </tr>
+            <tr th:each="customer:${customerList}">
+                <td th:text="${customer.seatno == '2A'} ? ${customer.name} : '2A'"></td>
+                <td th:text="${customer.seatno == '2B'} ? ${customer.name} : '2B'"></td>
+                <td th:text="${customer.seatno == '2C'} ? ${customer.name} : '2C'"></td>
+                <td th:text="${customer.seatno == '2D'} ? ${customer.name} : '2D'"></td>
+                <td th:text="${customer.seatno == '2E'} ? ${customer.name} : '2E'"></td>
+            </tr>
+            <tr th:each="customer:${customerList}">
+                <td th:text="${customer.seatno == '3A'} ? ${customer.name} : '3A'"></td>
+                <td th:text="${customer.seatno == '3B'} ? ${customer.name} : '3B'"></td>
+                <td th:text="${customer.seatno == '3C'} ? ${customer.name} : '3C'"></td>
+                <td th:text="${customer.seatno == '3D'} ? ${customer.name} : '3D'"></td>
+                <td th:text="${customer.seatno == '3E'} ? ${customer.name} : '3E'"></td>
+            </tr>
+            <tr th:each="customer:${customerList}">
+                <td th:text="${customer.seatno == '4A'} ? ${customer.name} : '4A'"></td>
+                <td th:text="${customer.seatno == '4B'} ? ${customer.name} : '4B'"></td>
+                <td th:text="${customer.seatno == '4C'} ? ${customer.name} : '4C'"></td>
+                <td th:text="${customer.seatno == '4D'} ? ${customer.name} : '4D'"></td>
+                <td th:text="${customer.seatno == '4E'} ? ${customer.name} : '4E'"></td>
+            </tr>
+            </tbody>
+        </table>
+<script>
+ let count = 20 - customerlist.count;
+ let title = document.getElementById("title");
+ title.textContent = `There are ${count} seats remaining`
+</script>
+<h1 id="title">There are {} seats remaining</h1>
+<!--reserve a seat option I thought having the form on this page was damaging the other table, but it wasn't that, no time to change it back-->
+    <a th:href="@{/add}" class="btn btn-primary btn-sm mb-2 specialbtn">Make Reservation</a>
+
+</div>
+
+</div>
+<!--main customer table-->
+<div class="container mt-2 pre-scrollable">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Transaction Code</th>
+                <th>Date</th>
+                <th>Seat Number</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <hr>
+            <tbody>
+            <tr th:each="customer:${customerList}">
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.tdate}"></td>
+                <td th:text="${customer.seatno}"></td>
+                <td th:text="${customer.name}"></td>
+                <td>
+                    <a class="btn btn-danger" th:href="@{delete(id=${customer.id})}" >Delete</a>
+                    <a class="btn btn-success" th:href="@{editReservation(id=${customer.id})}">Edit</a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
